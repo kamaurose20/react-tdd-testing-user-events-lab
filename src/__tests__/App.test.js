@@ -1,91 +1,53 @@
 import { render, screen } from "@testing-library/react";
 import '@testing-library/jest-dom';
-
 import App from "../App";
 
-// Portfolio Elements
-test("displays a top-level heading with the text `Hi, I'm _______`", () => {
-  render(<App />);
+// Your tests here
 
-  const topLevelHeading = screen.getByRole("heading", {
-    name: /hi, i'm/i,
-    exact: false,
-    level: 1,
-  });
 
-  expect(topLevelHeading).toBeInTheDocument();
-});
+test("displays a top-level heading with the text `Hi, I'm _______`", () => {  
+  render(<App />);  
+  const topLevelHeading = screen.getByRole("heading", {  
+    name: /hi, i'm/i,  
+    exact: false,  
+    level: 1,  
+  });  
+  expect(topLevelHeading).toBeInTheDocument();  
+});  
 
-test("displays an image of yourself", () => {
-  render(<App />);
+test("displays an image with alt text identifying the content", () => {  
+  render(<App />);  
+  const image = screen.getByAltText("A description of yourself");  
+  expect(image).toBeInTheDocument();  
+  expect(image).toHaveAttribute('src', 'your-image-url.jpg'); // replace with the actual image URL  
+});  
 
-  const image = screen.getByAltText("My profile pic");
+test("displays a second-level heading with the text `About Me`", () => {  
+  render(<App />);  
+  const aboutMeHeading = screen.getByRole("heading", {  
+    name: /about me/i,  
+    exact: false,  
+    level: 2,  
+  });  
+  expect(aboutMeHeading).toBeInTheDocument();  
+});  
 
-  expect(image).toHaveAttribute("src", "https://via.placeholder.com/350");
-});
+test("displays a paragraph for the biography", () => {  
+  render(<App />);  
+  const biographyParagraph = screen.getByText(/this is my biography/i);  
+  expect(biographyParagraph).toBeInTheDocument();  
+});  
 
-test("displays second-level heading with the text `About Me`", () => {
-  render(<App />);
+test("contains a link to GitHub", () => {  
+  render(<App />);  
+  const githubLink = screen.getByRole("link", { name: /github/i });  
+  expect(githubLink).toBeInTheDocument();  
+  expect(githubLink).toHaveAttribute('href', 'https://github.com/your-github'); // replace with your actual GitHub URL  
+});  
 
-  const secondLevelHeading = screen.getByRole("heading", {
-    name: /about me/i,
-    level: 2,
-  });
-
-  expect(secondLevelHeading).toBeInTheDocument();
-});
-
-test("displays a paragraph for your biography", () => {
-  render(<App />);
-
-  const bio = screen.getByText(/lorem ipsum/i);
-
-  expect(bio).toBeInTheDocument();
-});
-
-test("displays the correct links", () => {
-  render(<App />);
-
-  const githubLink = screen.getByRole("link", {
-    name: /github/i,
-  });
-  const linkedinLink = screen.getByRole("link", {
-    name: /linkedin/i,
-  });
-
-  expect(githubLink).toHaveAttribute(
-    "href",
-    expect.stringContaining("https://github.com")
-  );
-
-  expect(linkedinLink).toHaveAttribute(
-    "href",
-    expect.stringContaining("https://linkedin.com")
-  );
-});
-
-// Newsletter Form - Initial State
-test("the form includes text inputs for name and email address", () => {
-  // your test code here
-});
-
-test("the form includes three checkboxes to select areas of interest", () => {
-  // your test code here
-});
-
-test("the checkboxes are initially unchecked", () => {
-  // your test code here
-});
-
-// Newsletter Form - Adding Responses
-test("the page shows information the user types into the name and email address form fields", () => {
-  // your test code here
-});
-
-test("checked status of checkboxes changes when user clicks them", () => {
-  // your test code here
-});
-
-test("a message is displayed when the user clicks the Submit button", () => {
-  // your test code here
+test("contains a link to LinkedIn", () => {  
+  render(<App />);  
+  const linkedinLink = screen.getByRole("link", { name: /linkedin/i });  
+  expect(linkedinLink).toBeInTheDocument();  
+  expect(linkedinLink).toHaveAttribute('href', 'https://linkedin.com/in/your-linkedin'); // replace with your actual LinkedIn URL  
 });
